@@ -6,8 +6,6 @@ import Manufacturer from './Manufacturer';
 
 class Browser {
     constructor( params = {} ) {
-        this.entityId = params.id || 0;
-        this.slug = params.slug || '';
         this._config = new SearchParams;
         this._paginator = new Paginator;
         this._paginator.browser = this;
@@ -29,18 +27,10 @@ class Browser {
         return data;
     }
 
-    _getClient() {
-        return Client;
-    }
-
-    _query( path, payload ) {
-        return this._getClient().request( path, payload );
-    }
-
     all() {
-        let path = this._getSearchPath();
+        let path = `search.list`;
         let payload = this._getSearchPayload();
-        let promise = this._query( path, payload );
+        let promise = Client.request( path, payload );
         return promise.then( response => {
             let collection = [];
             for( let item of response.result.items ){

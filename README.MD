@@ -20,7 +20,7 @@ Config.boot().then(() => {
     //start quering 
 });
 ```
-- Search a Video, Playlist, Channel or all of them.
+- Search a Video, Playlist, Channel or all of them together.
 ```javascript
 import {Video} from 'youtube-client-wrapper';
 

@@ -3,7 +3,7 @@ Wrapper written in ECMAScript 6. Allows a simplified use of [Google API Client (
 Entity oriented approach
 
 ## How simple it is?
-- Include Google API script in the html page.paramters
+- Include Google API script in the html page.
 ```html
 <script src="https://apis.google.com/js/client.js?onload=OnGoogleAPILoadCallback"></script>
 ```

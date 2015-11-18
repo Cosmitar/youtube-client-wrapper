@@ -77,11 +77,38 @@ let onClickNextHandler = () => {
 ```
 for a full list of search parameters, see https://developers.google.com/apis-explorer/#p/youtube/v3/
 
-**At this point the Wrapper only support querying methods. More features will be developed in the future.**
+## Authorization
+Config the CLIENT_ID and SCOPES
+```javascript
+Config.set({
+    apiKey: 'YOUR API KEY',
+    clientId: 'YOUR CLIENT ID',
+    scopes: ['https://www.googleapis.com/auth/youtube']
+});
+```
+Include the authorization service and call...
+```javascript
+import {Auth} from 'youtube-client-wrapper';
+Auth.authorize()
+    .then( authorized, notAuthorized );
+```
+The first time, the authorization will fail because the current user (even logged in) doesn't authorize the app ever before.
+Therefore, you need to handle the UI to offer to the user a button with a onClick function to trigger the authorization popup.
+```javascript
+notAuthorized() {
+    let btn = document.querySelector('#login_button');
+    btn.style.visibility = 'visible';
+    btn.onclick = () => {
+        Auth.showAuth()
+            .then( authSuccess, authFail );
+    }
+}
+```
+**More features will be developed in the future.**
 
 See here a working example soon.
 
-##Development
+## Development
 ```git clone git@github.com:Cosmitar/youtube-client-wrapper.git```
 
 ```npm install```
@@ -90,5 +117,5 @@ See here a working example soon.
 
 Open the localhost:3000/demo/index.html and look for console logs
 
-##License
+## License
 MIT

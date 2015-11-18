@@ -3,7 +3,7 @@ Wrapper written in ECMAScript 6. Allows a simplified use of [Google API Client (
 Entity oriented approach
 
 ## How simple it is?
-- Include Google API script in the html page.
+- Include Google API script in the html page.paramters
 ```html
 <script src="https://apis.google.com/js/client.js?onload=OnGoogleAPILoadCallback"></script>
 ```
@@ -73,7 +73,7 @@ let onClickNextHandler = () => {
     });
 }
 ```
-for a full list of search paramters, see https://developers.google.com/apis-explorer/#p/youtube/v3/
+for a full list of search parameters, see https://developers.google.com/apis-explorer/#p/youtube/v3/
 
 **At this point the Wrapper only support querying methods. More features will be developed in the future.**
 

@@ -14,7 +14,7 @@ Config.set({
             apiKey: 'YOUR API KEY'
 });
 ```
-- Boot up the API, this will include the YoutTube API vía ``````javascript gapi.client.load('youtube', 'v3')```
+- Boot up the API, this will include the YoutTube API vía ```javascript gapi.client.load('youtube', 'v3')```
 ```javascript
 Config.boot().then(() => {
     //start quering 

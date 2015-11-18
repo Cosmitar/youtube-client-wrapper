@@ -52,7 +52,9 @@ class Manufacturer {
     make( YouTubeResultItem ) {
         let item;
         for( let factory of this.factories ){
-            if( factory.key == YouTubeResultItem.id.kind ){
+            if( factory.key == YouTubeResultItem.id.kind //for Search.List
+             || factory.key == YouTubeResultItem.kind //for Videos.List
+            ){
                 item = new factory.source( YouTubeResultItem );
             }
         }

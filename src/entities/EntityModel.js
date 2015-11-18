@@ -1,11 +1,12 @@
 'use strict'
 import YouTubeSearch from './YouTubeSearch';
+import Browser from './../classes/Browser';
 
 class EntityModel extends YouTubeSearch{
     constructor( YouTubeSearchItemData ) {
         super(YouTubeSearchItemData);
         this.kind = YouTubeSearchItemData.id.kind;
-        this.id = YouTubeSearchItemData.id[`${this.SINGLE_TYPE}Id`];
+        this.id = YouTubeSearchItemData.id[`${this.constructor.SINGLE_TYPE}Id`] || YouTubeSearchItemData.id;
         Object.assign(this,YouTubeSearchItemData.snippet);
 
         this.rawData = YouTubeSearchItemData;
@@ -37,7 +38,15 @@ class EntityModel extends YouTubeSearch{
     * Protect attributes from mass assigment. Ready to be overwritten by generalization
     * @return {Array<string>} The names of the attributes to keep safe from mass assign.
     */
-    static _getNotFillable(){ return []; }
+    static _getNotFillable(){ return ['id']; }
+
+    static several( entitiesIds = [], params = {} ) {
+        params.id = entitiesIds.join(',');
+        params.type = this.FAMILY_TYPE;
+        let searcher = new Browser();
+        searcher.config = params;
+        return searcher.find();
+    }
 
     /**
     * Returns the URI thumbnail based on optional size parameter

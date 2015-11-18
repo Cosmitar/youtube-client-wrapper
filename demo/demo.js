@@ -4,7 +4,8 @@ import Video from './../src/entities/YouTubeVideo';
 import Playlist from './../src/entities/YouTubePlaylist';
 import Channel from './../src/entities/YouTubeChannel';
 import Search from './../src/entities/YouTubeSearch';
-import Auth from './../src/entities/Auth';
+import Auth from './../src/services/Auth';
+
 let Demo = {
     index: 0,
     continuous: false,
@@ -61,13 +62,15 @@ let Demo = {
             .then(page => {
                 console.log('Search.where');
                 for( let entity of page.elements ){
-                    console.log(`${entity.constructor.name}: ${entity.title}`);
+                    console.log(`${entity.constructor.name}: ${entity.title} ${entity.id}`);
                     console.log(`${entity.getThumbnail()}`);
                 }
+                _self.next();
             });
     },
-    demo4: function(){
+    demo4: function( callback = () => {} ){
         let _self = this;
+        let _callback = callback;
         console.log('AUTHENTICATION');
         Auth.authorize()
             .then( authResult => {
@@ -80,6 +83,8 @@ let Demo = {
         let loggedInHandler = () => {
             hideLoginBtn();
             console.log('MAKE API CALL!');
+            _callback();
+            _self.next();
         }
 
         let showLoginBtn = () => {
@@ -102,6 +107,18 @@ let Demo = {
             btn.style.visibility = 'hidden';
         };
     },
+    demo5: function(){
+        let _self = this;
+        Demo.demo4( () => {
+            Video.several(['DfG6VKnjrVw','DDWKuo3gXMQ','hLQl3WQQoQ0'])
+            .then(page => {
+                page.elementAt(0).rate('like');
+                page.elementAt(1).rate('none');
+                page.elementAt(2).rate('dislike');
+            });
+            _self.next();
+        });
+    },
     demoX: function(){
         let _self = this;
         _self.next();
@@ -117,6 +134,6 @@ window.OnGoogleAPILoadCallback = () => {
         .boot()
         .then(() => {
             Demo.all();
-            //Demo.demo4();
+            //Demo.demo5();
         });
 }

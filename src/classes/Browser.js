@@ -27,10 +27,7 @@ class Browser {
         return data;
     }
 
-    all() {
-        let path = `search.list`;
-        let payload = this._getSearchPayload();
-        let promise = Client.request( path, payload );
+    _processQuery( promise ) {
         return promise.then( response => {
             let collection = [];
             for( let item of response.result.items ){
@@ -45,6 +42,26 @@ class Browser {
             console.log(reject);
             return reject;
         });
+    }
+
+    all() {
+        let path = `search.list`;
+        let payload = this._getSearchPayload();
+        let promise = Client.request( path, payload );
+        return this._processQuery( promise );
+    }
+
+    find() {
+        let path = `${this._config.type}.list`;
+        let payload = this._getSearchPayload();
+        let promise = Client.request( path, payload );
+        return this._processQuery( promise );
+    }
+
+    rate() {
+        let path = `${this._config.type}.rate`;
+        let payload = this._getSearchPayload();
+        return Client.request( path, payload );
     }
 
 }

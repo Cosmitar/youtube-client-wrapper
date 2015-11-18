@@ -73,7 +73,7 @@ let onClickNextHandler = () => {
     });
 }
 ```
-for a full paramters list see https://developers.google.com/apis-explorer/#p/youtube/v3/
+for a full list of search paramters, see https://developers.google.com/apis-explorer/#p/youtube/v3/
 
 **At this point the Wrapper only support quering methods. More features will be developed in the future.**
 

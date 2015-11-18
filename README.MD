@@ -104,7 +104,7 @@ notAuthorized() {
     }
 }
 ```
-**More features will be developed in the future.**
+**There's a lot of features to develope.**
 
 See here a working example soon.
 

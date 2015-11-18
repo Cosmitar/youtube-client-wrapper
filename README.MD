@@ -11,7 +11,7 @@ Entity oriented approach
 ```javascript
 import {Config} from 'youtube-client-wrapper';
 Config.set({
-            apiKey: 'YOUR API KEY'
+    apiKey: 'YOUR API KEY'
 });
 ```
 - Boot up the API, this will include the YoutTube API vía ``` gapi.client.load('youtube', 'v3')```

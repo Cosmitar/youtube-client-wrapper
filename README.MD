@@ -86,7 +86,7 @@ See here a working example soon.
 
 ```gulp watch```
 
-Open the localhost:3000/demo/index.html and look for console.logs
+Open the localhost:3000/demo/index.html and look for console logs
 
 ##License
 MIT

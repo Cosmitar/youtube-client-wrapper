@@ -9,7 +9,6 @@ var  singletonConfig = false;
 class Config {
     constructor() {
         this._apiKey = '';
-        this._boot = ()=>{};
     }
 
     /**

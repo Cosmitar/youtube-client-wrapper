@@ -60,7 +60,7 @@ let params = {
 };
 let pager;
 
-Video.where('Marron 5', params)
+Video.where('Maroon 5', params)
     .then((page => {
         pager = page;
         drawElements( page.elements );

@@ -7,11 +7,13 @@ Entity oriented approach
 ```html
 <script src="https://apis.google.com/js/client.js?onload=OnGoogleAPILoadCallback"></script>
 ```
-- Config the API client with your API_KEY.
+- Config the API client with your API_KEY (mandatory to query) and optional CLIENT_ID and SCOPES in case you require activities with user data.
 ```javascript
 import {Config} from 'youtube-client-wrapper';
 Config.set({
-    apiKey: 'YOUR API KEY'
+    apiKey: 'YOUR API KEY',
+    clientId: 'YOUR CLIENT ID',//optional
+    scopes: ['https://www.googleapis.com/auth/youtube']//optional
 });
 ```
 - Boot up the API, this will include the YoutTube API vía ``` gapi.client.load('youtube', 'v3')```

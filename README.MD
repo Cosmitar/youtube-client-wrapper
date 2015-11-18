@@ -7,7 +7,7 @@ Entity oriented approach
 ```html
 <script src="https://apis.google.com/js/client.js?onload=OnGoogleAPILoadCallback"></script>
 ```
-- Config the API client with your API_KEY (mandatory to query) and optional CLIENT_ID and SCOPES in case you require activities with user data.
+- Config the API client with your API_KEY (mandatory for query) and optional CLIENT_ID and SCOPES in case you require activities with user data.
 ```javascript
 import {Config} from 'youtube-client-wrapper';
 Config.set({

@@ -74,8 +74,10 @@ let onClickNextHandler = () => {
 }
 ```
 for a full paramters list see https://developers.google.com/apis-explorer/#p/youtube/v3/
-**At this point the Wrapper allows only quering methods. More features will be developed in the future.**
-See a working example soon.
+
+**At this point the Wrapper only support quering methods. More features will be developed in the future.**
+
+See here a working example soon.
 
 ##Development
 ```git clone git@github.com:Cosmitar/youtube-client-wrapper.git```

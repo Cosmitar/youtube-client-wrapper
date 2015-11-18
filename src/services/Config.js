@@ -4,26 +4,29 @@
 * Flag for avoid multiple instances of Config class
 * @type {boolean}
 */
-var  singletonConfig = false;
+let singletonConfig = false,
+    apiKey, clientId, scopes;
 
 class Config {
-    constructor() {
-        this._apiKey = '';
-    }
-
     /**
     * Sets variables by given data.
     * @param {object} data
     */
     set( data ) {
-        this._apiKey = data.apiKey;
+        apiKey = data.apiKey;
+        clientId = data.clientId;
+        scopes = data.scopes;
         return this;
     }
+
+    get apiKey()    { return apiKey; }
+    get clientId()  { return clientId; }
+    get scopes()    { return scopes; }
 
     boot() {
         return new Promise( (resolve, reject) => {
             //load API client
-            gapi.client.setApiKey(this._apiKey);
+            gapi.client.setApiKey(apiKey);
             gapi.client.load('youtube', 'v3')
                 .then(() => {
                     resolve();

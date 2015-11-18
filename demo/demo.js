@@ -4,6 +4,7 @@ import Video from './../src/entities/YouTubeVideo';
 import Playlist from './../src/entities/YouTubePlaylist';
 import Channel from './../src/entities/YouTubeChannel';
 import Search from './../src/entities/YouTubeSearch';
+import Auth from './../src/entities/Auth';
 let Demo = {
     index: 0,
     continuous: false,
@@ -65,6 +66,42 @@ let Demo = {
                 }
             });
     },
+    demo4: function(){
+        let _self = this;
+        console.log('AUTHENTICATION');
+        Auth.authorize()
+            .then( authResult => {
+                console.log(authResult);
+                loggedInHandler();
+            },() => {
+                showLoginBtn();
+            });
+
+        let loggedInHandler = () => {
+            hideLoginBtn();
+            console.log('MAKE API CALL!');
+        }
+
+        let showLoginBtn = () => {
+            let btn = document.querySelector('#login_button');
+            btn.style.visibility = 'visible';
+            btn.onclick = () => {
+                Auth.showAuth()
+                    .then(authResult => {
+                        console.log(authResult);
+                        loggedInHandler();
+                    }, authResult => {
+                        console.log('Cant authenticate.');
+                        console.log(authResult.error);
+                    });
+            }
+        };
+
+        let hideLoginBtn = () => {
+            let btn = document.querySelector('#login_button');
+            btn.style.visibility = 'hidden';
+        };
+    },
     demoX: function(){
         let _self = this;
         _self.next();
@@ -73,11 +110,13 @@ let Demo = {
 
 window.OnGoogleAPILoadCallback = () => { 
     Config.set({
-            apiKey: 'AIzaSyB8_0tIV6QuSA5Qb1zx3kXW8UAB-cATQXU'
+            apiKey: 'YOUR API KEY',
+            clientId: 'YOUR CLIENT ID',
+            scopes: ['https://www.googleapis.com/auth/youtube']
         })
         .boot()
         .then(() => {
             Demo.all();
-            //Demo.demo3();
+            //Demo.demo4();
         });
 }

@@ -2,10 +2,7 @@
   "name": "youtube-client-wrapper",
   "version": "0.2.1",
   "description": "Javascript wrapper to simplify the implementation of Youtube API client",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Cosmitar/youtube-client-wrapper"
@@ -33,6 +30,7 @@
     "lodash": "3.10.1"
   },
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel -d lib/ src/",
     "prepublish": "npm run build"
   },

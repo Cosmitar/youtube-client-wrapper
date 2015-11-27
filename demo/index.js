@@ -119,6 +119,23 @@ let Demo = {
             _self.next();
         });
     },
+    demo6: function(){
+        let _self = this;
+        console.log('SEARCH VIDEOS AND GET ADDITIONAL DETAILS');
+        console.log(`Search for: Dream On, Aerosmith`);
+        let config = {
+            part: 'contentDetails'
+        };
+        Video.where('Dream On, Aerosmith')
+            .then((page) => {
+                let video = page.firstElement();
+                console.log( `Duration for: ${video.title}` );
+                video.get( config ).then( video => {
+                    console.log( video.contentDetails.duration);
+                    _self.next();
+                });
+            });
+    },
     demoX: function(){
         let _self = this;
         _self.next();
@@ -127,13 +144,13 @@ let Demo = {
 
 window.OnGoogleAPILoadCallback = () => { 
     Config.set({
-            apiKey: 'YOUR API KEY',
-            clientId: 'YOUR CLIENT ID',
+            apiKey: 'AIzaSyB8_0tIV6QuSA5Qb1zx3kXW8UAB-cATQXU',
+            clientId: '884796023336-16d8mbf2k8qgpls5nkkupb2kf54sug38.apps.googleusercontent.com',
             scopes: ['https://www.googleapis.com/auth/youtube']
         })
         .boot()
         .then(() => {
-            Demo.all();
-            //Demo.demo5();
+            //Demo.all();
+            Demo.demo6();
         });
 }

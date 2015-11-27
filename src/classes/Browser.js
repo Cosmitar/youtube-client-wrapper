@@ -6,9 +6,25 @@ import Manufacturer from './Manufacturer';
 
 class Browser {
     constructor( params = {} ) {
+        /**
+        * Configuration parameters for the query.
+        * @type {SearchParams}
+        */
         this._config = new SearchParams;
-        this._paginator = new Paginator;
-        this._paginator.browser = this;
+
+        /**
+        * Paginator handler
+        * @type {Paginator}
+        */
+        this._paginator = new Paginator( this );
+
+        /**
+        * The origin of the query, usually the name of the entity who trigger the process.
+        * This parameter is used to build the path or url.
+        * Can defer for the entity type into SearchParams
+        * @type {string}
+        */
+        this.origin = params.origin;
     }
 
     set config( searchParams = {} ) {
@@ -30,6 +46,7 @@ class Browser {
     _processQuery( promise ) {
         return promise.then( response => {
             let collection = [];
+            //console.log(response.result);
             for( let item of response.result.items ){
                 collection.push( Manufacturer.make( item ) );
             }
@@ -45,21 +62,21 @@ class Browser {
     }
 
     all() {
-        let path = `search.list`;
+        let path = `${this.origin}.list`;
         let payload = this._getSearchPayload();
         let promise = Client.request( path, payload );
         return this._processQuery( promise );
     }
 
     find() {
-        let path = `${this._config.type}.list`;
+        let path = `${this.origin}.list`;
         let payload = this._getSearchPayload();
         let promise = Client.request( path, payload );
         return this._processQuery( promise );
     }
 
     rate() {
-        let path = `${this._config.type}.rate`;
+        let path = `${this.origin}.rate`;
         let payload = this._getSearchPayload();
         return Client.request( path, payload );
     }

@@ -1,9 +1,12 @@
 'use strict'
 
 class Paginator {
-    constructor( data = {} ) {
-        this._limit = data.maxResults || Paginator.LIMIT_DEFAULT;
-        this._offset = data.offset || Paginator.OFFSET_DEFAULT;
+    constructor( owner ) {
+        /**
+        * Initialization variables
+        */
+        this._limit = /*data.maxResults || */Paginator.LIMIT_DEFAULT;
+        this._offset = /*data.offset || */Paginator.OFFSET_DEFAULT;
         this._total_pages = 0;
         this._total_results = 0;
         this._currentIndex = 1;
@@ -13,6 +16,12 @@ class Paginator {
         this._prevPageToken = '';
         this._tokenPagination = '';
         this._pageToken = null;
+
+        /**
+        * Composition owner, shuld be an object who handle the method .all() to trigger a search
+        * @type {Browser}
+        */
+        this._owner = owner;
     }
 
     get searchParams() { return this._searchParams; }
@@ -30,7 +39,7 @@ class Paginator {
     get page_size() { return this._limit; }
 
     set browser( value ) {
-        this._browser = value;
+        this._owner = value;
     }
 
     getPaginationParams() {
@@ -76,7 +85,7 @@ class Paginator {
             if( this.hasNextPage() ){
                 this._offset++;
                 this._pageToken = this._nextPageToken;
-                this._browser.all()
+                this._owner.all()
                     .then(result => {
                         this._pageToken = null;//clear for next queries not related with pagination
                         resolve( result );
@@ -92,7 +101,7 @@ class Paginator {
             if( this.hasPrevPage() ){
                 this._offset--;
                 this._pageToken = this._prevPageToken;
-                this._browser.all()
+                this._owner.all()
                     .then(() => {
                         this._pageToken = null;//clear for next queries not related with pagination
                     })
@@ -108,21 +117,21 @@ class Paginator {
     firstPage() {
         let retVal = new Promise((resolve,reject) => {
             this._offset = 0;
-            resolve( this._browser.all() );
+            resolve( this._owner.all() );
         });
         return retVal;
     }
     lastPage() {
         let retVal = new Promise((resolve,reject) => {
             this._offset = this._total_pages;
-            resolve( this._browser.all() );
+            resolve( this._owner.all() );
         });
         return retVal;
     }
     goToPage( index ) {
         let retVal = new Promise((resolve,reject) => {
             this._offset = index;
-            resolve( this._browser.all() );
+            resolve( this._owner.all() );
         });
         return retVal;
     }

@@ -42,10 +42,18 @@ class EntityModel extends YouTubeSearch{
 
     static several( entitiesIds = [], params = {} ) {
         params.id = entitiesIds.join(',');
-        params.type = this.FAMILY_TYPE;
         let searcher = new Browser();
+        searcher.origin = this.FAMILY_TYPE;
         searcher.config = params;
         return searcher.find();
+    }
+
+    static find(...params) {
+        //let {id,...other} = params;
+        let id = params.shift();
+        return this.several( [id], ...params ).then( page => {
+            return page.firstElement();
+        });
     }
 
     /**

@@ -2,7 +2,7 @@
 Wrapper written in ECMAScript 6. Allows a simplified use of [Google API Client (YouTube API)](https://developers.google.com/api-client-library/javascript/).
 Entity oriented approach
 
-## How simple it is?
+## How simple is it?
 - Include Google API script in the html page.
 ```html
 <script src="https://apis.google.com/js/client.js?onload=OnGoogleAPILoadCallback"></script>
@@ -80,6 +80,7 @@ for a full list of search parameters, see https://developers.google.com/apis-exp
 ## Authorization
 Config the CLIENT_ID and SCOPES
 ```javascript
+import {Config} from 'youtube-client-wrapper';
 Config.set({
     apiKey: 'YOUR API KEY',
     clientId: 'YOUR CLIENT ID',
@@ -106,7 +107,7 @@ notAuthorized() {
 ```
 **There's a lot of features to develope.**
 
-See here a working example soon.
+See [here](https://github.com/fusenlabs/20v) a working implementation.
 
 ## Development
 ```git clone git@github.com:Cosmitar/youtube-client-wrapper.git```
